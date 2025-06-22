@@ -21,7 +21,7 @@ h2.title {
 }
 
 .article-body {
-  white-space: normal;
+  white-space: pre-wrap;
   font-size: 1rem;
 }
 
