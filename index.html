@@ -1,37 +1,19 @@
-name: Generate Index
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>My Blog</h1>
+  <p><a href="start.html">Start Your Blog</a></p>
 
-on:
-  workflow_dispatch:
-  push:
-    paths:
-      - 'post*.html'
-      - 'generate-index.js'
+  <ul class="entry-list">
+    <!-- 自動生成される記事リスト -->
+  </ul>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Init npm & install jsdom
-        run: |
-          npm init -y
-          npm install jsdom
-
-      - name: Run generate-index.js
-        run: node generate-index.js
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Auto-update index.html" || echo "No changes"
-          git push
+  <p><a href="submit.html">投稿する</a></p>
+</body>
+</html>
