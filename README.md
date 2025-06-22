@@ -13,53 +13,33 @@
 ## 🌱 ブログを始める方法（3分で完了！）
 
 ### 1. GitHub アカウントを作成
-まだ GitHub アカウントを持っていない方は、以下から無料で作成できます：
+まだ GitHub アカウントを持っていない方は、以下から無料で作成できます：  
 👉 https://github.com/signup
 
-### 2. テンプレートをコピー（Use this template）
+### 2. テンプレートをコピー
 - このページ右上の [Use this template] ボタンを押す
-- 任意のリポジトリ名を入力 → [Create repository from template]
+- 任意のリポジトリ名を入力（例：`my-blog`）
+- [Create repository from template] をクリック
 
 ### 3. GitHub Pages を有効にする
-- コピーされたリポジトリに移動
-- [Settings] → [Pages] を開く
-- "Branch: main / (root)" を選択して [Save]
-- 数十秒後にあなたのブログが公開されます 🎉
+- コピーしたリポジトリを開く
+- 上部メニューの [Settings] → 左の [Pages] を選択
+- 「Branch」項目で `main` / `(root)` を選択し、**[Save]** を押す
 
-### 4. 投稿してみる
-- あなたのブログ URL に `/submit.html` をつけてアクセス（例：https://yourname.github.io/blog/submit.html）
-- 投稿フォームに「タイトル」「日付（空欄でOK）」「本文」を入力して [投稿する]
-- 自動で `postX.html` が作成され、`index.html` にも反映されます（1〜2分かかることがあります）
+⚠️ この設定を保存しないとブログが公開されません  
+💡 保存後、約30秒〜1分で公開されます（例：https://yourname.github.io/my-blog）
 
 ---
 
-## 🛠 構成ファイル
-- `index.html`：トップページ（最新3件を表示）
-- `postX.html`：記事ページ（自動生成）
-- `submit.html`：投稿フォーム
-- `generate-from-issue.js`：Issueから投稿を作成
-- `generate-index.js`：postX.html を読み込み index を自動更新
-- `.github/workflows/`：上記スクリプトを動かすGitHub Actions
+### 4. 投稿フォーム（submit.html）を設定する
 
----
+#### 4-1. セキュリティのため submit.html をリネーム
+- `submit.html` → 自分だけがわかる名前に変更（例：`submit-nf93k2.html`）
+- 公開URLは `https://yourname.github.io/my-blog/submit-nf93k2.html` になります
 
-## 🖌 カスタマイズしたい？
-- `style.css` を編集してデザイン変更できます
-- 投稿フォーマットやファイル名ルールも調整可能
+#### 4-2. submit.html 内の GitHub リポジトリ情報を変更
+ファイル内の以下の部分を探して、自分の GitHub アカウントに合わせて書き換えてください：
 
----
-
-## 🔁 友達にもシェアしよう
-このテンプレートは増殖型！
-
-`index.html` にある「Start Your Blog」リンクから、誰でも自分のブログを始められます。  
-拡散・再発酵、歓迎。
-
----
-
-## 💬 お問い合わせ
-バグ報告・改善提案などは Issue や Pull Request でどうぞ！
-
----
-
-© 2025 cyber-nostalgia-template
+```js
+const username = "YOUR_GITHUB_USERNAME";   // 例: tanaka
+const repository = "YOUR_REPOSITORY_NAME"; // 例: my-blog
