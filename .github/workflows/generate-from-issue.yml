@@ -1,51 +1,54 @@
-const fs = require('fs');
-const yaml = require('js-yaml');
+name: Generate Post from Issue
 
-// Issue からデータ読み込み
-const issue = JSON.parse(fs.readFileSync('issue.json', 'utf8'));
-const title = issue.title || 'Untitled';
-const body = issue.body || '';
+on:
+  issues:
+    types: [opened]
 
-// フロントマター抽出
-const match = body.match(/^-{3,}\s*\n([\s\S]*?)\n-{3,}\s*\n([\s\S]*)$/m);
-if (!match) {
-  console.error("❌ フロントマターが見つかりません（形式: ---\\ndate: YYYYMMDD\\n---\\n本文）");
-  process.exit(1);
-}
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-const metadata = yaml.load(match[1]);
-const content = match[2].trim();
-const date = metadata.date || new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-// 投稿ファイルの連番決定
-const files = fs.readdirSync('.');
-const postFiles = files.filter(f => /^post\d+\.html$/.test(f));
-const nextIndex = postFiles
-  .map(f => parseInt(f.match(/^post(\d+)\.html$/)[1]))
-  .reduce((max, num) => Math.max(max, num), 0) + 1;
-const postNumber = String(nextIndex).padStart(2, '0');
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-// HTML生成（シンプル構成）
-const html = `<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>${title}</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <article>
-    <h2>#${postNumber} ${title}</h2>
-    <p>${date}</p>
-    <div class="article-body">
-${content}
-    </div>
-    <p><a href="index.html">← BACK TO TOP</a></p>
-  </article>
-</body>
-</html>`;
+      - name: Init npm & install dependencies
+        run: |
+          npm init -y
+          npm install jsdom js-yaml
 
-// ファイル保存
-fs.writeFileSync(`post${postNumber}.html`, html);
-console.log(`✅ post${postNumber}.html を生成しました`);
+      - name: Save issue payload
+        run: |
+          echo '${{ toJSON(github.event.issue) }}' > issue.json
+
+      - name: Generate post from issue
+        run: node generate-from-issue.js
+
+      - name: Commit post
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add post*.html
+          git commit -m "Add new post" || echo "No changes"
+          git push
+
+      - name: Init npm & install dependencies
+        run: |
+          npm init -y
+          npm install jsdom js-yaml
+
+      - name: Run generate-index.js
+        run: node generate-index.js
+
+      - name: Commit updated index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Auto-update index.html" || echo "No changes"
+          git push
