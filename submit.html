@@ -52,7 +52,7 @@
 
       // 👇 使用者が自分の GitHub ユーザー名とリポジトリ名に置き換える必要あり
       const username = "null00018";   // 例: tanaka YOUR_GITHUB_USERNAME
-      const repository = "blog_template"; // 例: my-blog YOUR_REPOSITORY_NAME
+      const repository = "blog-template"; // 例: my-blog YOUR_REPOSITORY_NAME
 
       const url = new URL(`https://github.com/${username}/${repository}/issues/new`);
       url.searchParams.set("title", title);
