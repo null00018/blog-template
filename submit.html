@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -34,6 +33,10 @@
     <button type="submit">GitHubで投稿</button>
   </form>
 
+  <p style="margin-top:2em; font-size:0.9em; color:gray;">
+    ※投稿は GitHub Issue 経由で送信されます。ログイン中のブラウザで操作してください。
+  </p>
+
   <script>
     document.getElementById("issueForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -42,18 +45,18 @@
       const dateInput = document.getElementById("date").value.trim();
       const bodyInput = document.getElementById("body").value.trim();
 
-      // 今日の日付（YYYYMMDD形式）
       const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
       const date = /^\d{8}$/.test(dateInput) ? dateInput : today;
 
-      // Issue body フォーマット生成
-      const issueBody =
-`---\ndate: ${date}\n---\n\n${bodyInput}`;
+      const issueBody = `---\ndate: ${date}\n---\n\n${bodyInput}`;
 
-      // GitHub Issue作成URLに飛ばす（GETパラメータで渡す）
-const user = location.hostname.split('.')[0]; // yourname.github.io → "yourname"
-const repo = location.pathname.split('/')[1]; // /yourrepo → "yourrepo"
-const url = new URL(`https://github.com/${user}/${repo}/issues/new`);
+      // 👇 使用者が自分の GitHub ユーザー名とリポジトリ名に置き換える必要あり
+      const username = "null00018";   // 例: tanaka
+      const repository = "test"; // 例: my-blog
+
+      const url = new URL(`https://github.com/${username}/${repository}/issues/new`);
+      url.searchParams.set("title", title);
+      url.searchParams.set("body", issueBody);
 
       window.open(url.toString(), '_blank');
     });
