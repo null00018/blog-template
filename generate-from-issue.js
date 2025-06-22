@@ -24,11 +24,7 @@ const nextIndex = postFiles
   .reduce((max, num) => Math.max(max, num), 0) + 1;
 const postNumber = String(nextIndex).padStart(2, '0');
 
-// 改行処理のみ（cyber-nostalgia準拠）
-const content = rawContent
-  .split(/\n{2,}/)
-  .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)  // 段落ごとに <p>、中の改行は <br>
-  .join('\n');
+const content = rawContent;
 
 // HTML生成
 const html = `<!DOCTYPE html>
