@@ -40,6 +40,17 @@
 #### 4-2. submit.html 内の GitHub リポジトリ情報を変更
 ファイル内の以下の部分を探して、自分の GitHub アカウントに合わせて書き換えてください：
 
+---
+
+## 🔗 あなたのブログリンク
+
+- 🏠 [ブログトップページ（index.html）](https://yourname.github.io/my-blog/)
+- ✍️ [投稿フォーム（submit-xxxx.html）](https://yourname.github.io/my-blog/submit-xxxx.html)
+
+※URLの `yourname` と `my-blog` はご自身のユーザー名とリポジトリ名に置き換えてください  
+※`submit-xxxx.html` はリネームした投稿フォームのファイル名です
+
+
 ```js
 const username = "YOUR_GITHUB_USERNAME";   // 例: tanaka
 const repository = "YOUR_REPOSITORY_NAME"; // 例: my-blog
