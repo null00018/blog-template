@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ブログ投稿フォーム</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2em auto;
+      padding: 1em;
+    }
+    label, textarea, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>ブログ投稿</h1>
+  <form id="issueForm">
+    <label>タイトル</label>
+    <input type="text" id="title" required>
+
+    <label>日付（例: 20250701、空なら今日）</label>
+    <input type="text" id="date" placeholder="例: 20250701">
+
+    <label>本文</label>
+    <textarea id="body" rows="10" required></textarea>
+
+    <button type="submit">GitHubで投稿</button>
+  </form>
+
+  <script>
+    document.getElementById("issueForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const dateInput = document.getElementById("date").value.trim();
+      const bodyInput = document.getElementById("body").value.trim();
+
+      // 今日の日付（YYYYMMDD形式）
+      const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const date = /^\d{8}$/.test(dateInput) ? dateInput : today;
+
+      // Issue body フォーマット生成
+      const issueBody =
+`---\ndate: ${date}\n---\n\n${bodyInput}`;
+
+      // GitHub Issue作成URLに飛ばす（GETパラメータで渡す）
+const user = location.hostname.split('.')[0]; // yourname.github.io → "yourname"
+const repo = location.pathname.split('/')[1]; // /yourrepo → "yourrepo"
+const url = new URL(`https://github.com/${user}/${repo}/issues/new`);
+
+      window.open(url.toString(), '_blank');
+    });
+  </script>
+</body>
+</html>
