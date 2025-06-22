@@ -13,7 +13,7 @@ if (!match) {
 }
 
 const metadata = yaml.load(match[1]);
-const content = match[2].trim();
+const rawContent = match[2].trim();
 const date = metadata.date || new Date().toISOString().slice(0,10).replace(/-/g, '');
 
 // 次のポスト番号
@@ -24,12 +24,18 @@ const nextIndex = postFiles
   .reduce((max, num) => Math.max(max, num), 0) + 1;
 const postNumber = String(nextIndex).padStart(2, '0');
 
+// 改行処理のみ（cyber-nostalgia準拠）
+const content = rawContent
+  .split(/\n{2,}/)
+  .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)  // 段落ごとに <p>、中の改行は <br>
+  .join('\n');
+
 // HTML生成
 const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Loading...</title> <!-- 仮のタイトル（自動で上書きされる） -->
+  <title>Loading...</title>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,22 +45,18 @@ const html = `<!DOCTYPE html>
     <article>
       <h2 class="title"><a class="neon" href="#">＞＞ #${postNumber} ${title}</a></h2>
       <p class="meta">${date}</p>
-        <div class="article-body">
+      <div class="article-body">
 ${content}
-        </div>
+      </div>
       <p class="neon"><a href="index.html">←START</a></p>
     </article>
   </div>
 
   <script>
-    function confirmExit() {
-      alert("ログアウト中... 電脳空間から切断します。");
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
       const heading = document.querySelector("h2.title");
       if (heading) {
-        const cleanTitle = heading.textContent.replace(/^＞＞\\s*/, '').trim();
+        const cleanTitle = heading.textContent.replace(/^＞＞\s*/, '').trim();
         document.title = cleanTitle;
       }
     });
