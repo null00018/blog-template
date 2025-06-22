@@ -50,33 +50,55 @@
     <li><a href="https://github.com/signup" target="_blank">GitHub サインアップページ</a>にアクセス</li>
     <li>ユーザー名・メールアドレス・パスワードを入力</li>
     <li>ロボットではないことを確認し、[Create Account] をクリック</li>
-    <li>無料プラン（Free）を選んで次へ</li>
+    <li>無料プランのまま次へ</li>
   </ol>
 
   <h2>📦 ステップ 2: テンプレートをコピー</h2>
-  <p>下のボタンを押すと、あなた専用のブログフォルダ（リポジトリ）が作成されます。</p>
+  <p>下のボタンを押すと、あなた専用のブログフォルダが作成されます。</p>
 
-  <a class="button" href="https://github.com/null00018/blog-template-minimal/generate" target="_blank">🚀 Use This Template</a>
+  <a class="button" href="https://github.com/null00018/blog-template/generate" target="_blank">🚀 Use This Template</a>
 
   <p>ボタンを押すと次のような画面になります：</p>
-
   <ol>
-    <li><strong>Repository name</strong>：好きなブログ名を入力（例：<code>my-blog</code>）</li>
-    <li><strong>Description</strong>：（任意）ブログの説明を入力できます。空欄でもOK。</li>
-    <li><strong>Visibility</strong>：「<strong>Public</strong>（公開）」にチェック（そのままでOK）</li>
-    <li>確認後、右下の <strong>Create repository</strong> ボタンをクリック！</li>
+    <li><strong>Repository name</strong>：好きなブログ名を入力</li>
+    <li><strong>Description</strong>：空欄でOK</li>
+    <li><strong>Visibility</strong>："Public" のまま</li>
+    <li><strong>Create repository</strong> ボタンをクリック</li>
   </ol>
 
-  <p>これであなた専用のブログテンプレートが作成されます。次に、GitHub Pages を有効にしましょう。</p>
+  <p>これでテンプレートが作成されました。</p>
 
   <h2>🌍 ステップ 3: GitHub Pages を有効に</h2>
   <ol>
-    <li>作成した自分のリポジトリにアクセス</li>
-    <li>右上の「Settings」 → 左側の「Pages」へ</li>
-    <li>"Branch: main / (root)" を選んで「Save」</li>
+    <li>作成したリポジトリの上部メニューから <strong>Settings</strong> をクリック</li>
+    <li>左側のメニューから <strong>Pages</strong> を選択</li>
+    <li><strong>Branch</strong> のプルダウンを <code>main</code> / <code>(root)</code> に設定</li>
+    <li><strong>Save</strong> ボタンを忘れずにクリック</li>
   </ol>
-  <p>約30秒〜1分後に、あなた専用のブログが公開されます。</p>
-
-  <h2>✍️ ステップ 4: 投稿ページを設定して投稿してみよう</h2>
+  <p>この設定をしないと、ブログは公開されません。</p>
+  
+  <h2>🔐 ステップ 4: GitHub Actions の書き込み権限を設定</h2>
   <ol>
-    <li><strong>セキュリティのため、<code>submit.html</code> を任意の名前にリ
+    <li><strong>Settings</strong> → 左側メニューの <strong>Actions</strong> → <strong>General</strong> を開く</li>
+    <li>下の方にある <strong>Workflow permissions</strong> の項目で、<br>
+      <strong>「Read and write permissions」</strong> を選択</li>
+    <li><strong>Save</strong> をクリック</li>
+  </ol>
+  <p>この設定を行わないと、投稿しても記事ファイル（<code>postX.html</code>）が作成されません。</p>
+
+  <h2>✍️ ステップ 5: 投稿ページを設定</h2>
+  <ol>
+    <li><code>submit.html</code> を Code のタブから開き、以下の部分を依須の情報に書き換え：
+<pre><code>const username = "YOUR_GITHUB_USERNAME";
+const repository = "YOUR_REPOSITORY_NAME";</code></pre>
+    例: tanaka / my-blog</li>
+    <li>保存したら <code>submit.html</code> を自分の好きな名前にリネーム（例: <code>submit-nf29ax.html</code> など）</li>
+    <li>そのURLにアクセス（例: <code>https://yourname.github.io/myblog/submit-nf29ax.html</code>）</li>
+    <li>フォームで投稿したら、自動的に記事が作成され、<code>index.html</code> に反映されます</li>
+  </ol>
+  <p>💡 投稿は GitHub Issue 経由で処理されます。</p>
+
+  <hr>
+  <p><a href="index.html">← BACK TO TOP</a></p>
+</body>
+</html>
