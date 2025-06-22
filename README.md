@@ -39,3 +39,19 @@
 
 #### 4-2. submit.html 内の GitHub リポジトリ情報を変更
 ファイル内の以下の部分を探して、自分の GitHub アカウントに合わせて書き換えてください：
+
+---
+
+## 🔗 あなたのブログURLを確認しよう
+
+作成したブログのトップページ（index.html）と投稿フォームへのURLは、次のようになります：
+
+- 🏠 トップページ（index.html）  
+  例：`https://yourname.github.io/myblog/`
+
+- ✍️ 投稿ページ（submit.html またはリネーム後のもの）  
+  例：`https://yourname.github.io/myblog/submit-nf29ax.html`
+
+> 🔧 `yourname` と `myblog` の部分は、あなたの GitHub ユーザー名とリポジトリ名に置き換えてください。
+>
+> 投稿ページのファイル名を変更した場合は、正しいファイル名に合わせてアクセスしてください。
