@@ -51,8 +51,8 @@
       const issueBody = `---\ndate: ${date}\n---\n\n${bodyInput}`;
 
       // 👇 使用者が自分の GitHub ユーザー名とリポジトリ名に置き換える必要あり
-      const username = "null00018";   // 例: tanaka
-      const repository = "test"; // 例: my-blog
+      const username = "YOUR_GITHUB_USERNAME";   // 例: tanaka
+      const repository = "YOUR_REPOSITORY_NAME"; // 例: my-blog
 
       const url = new URL(`https://github.com/${username}/${repository}/issues/new`);
       url.searchParams.set("title", title);
