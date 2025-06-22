@@ -48,7 +48,7 @@ const html = `<!DOCTYPE html>
       <div class="article-body">
 ${content}
       </div>
-      <p class="neon"><a href="index.html">←START</a></p>
+      <p><a href="index.html">←START</a></p>
     </article>
   </div>
 
